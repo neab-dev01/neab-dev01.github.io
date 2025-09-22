@@ -3,253 +3,239 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Studio — สตูดิโอสถาปนิก</title>
+  <title>[ชื่อของคุณ] — Dev Web (กำลังปรับปรุง)</title>
 
   <!-- Fonts & Bootstrap -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#fbfaf8;
-      --card:#ffffff;
-      --muted:#6b6b6b;
-      --accent:#1f2937;
-      --line: #e6e2de;
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#7dd3fc;
+      --accent-2:#60a5fa;
+      --line:#132032;
+      --glass: rgba(255,255,255,0.03);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background:var(--bg);
-      color:var(--accent);
+      background:linear-gradient(180deg,#071028 0%, #0b1220 100%);
+      color:var(--muted);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
+      line-height:1.6;
+      padding-bottom:40px;
     }
 
-    /* Top bar */
-    nav.navbar{
-      background:transparent;
-      padding:1rem 0;
-    }
-    .brand{
-      font-family:"Playfair Display", serif;
-      font-size:1.25rem;
-      letter-spacing:0.06em;
-    }
+    nav.navbar{ background:transparent; padding:1rem 0; }
+    .brand{ font-family:"Playfair Display", serif; font-size:1.15rem; color:var(--accent); }
 
-    /* Hero */
-    .hero{
-      padding:6.5rem 0 4rem;
-      background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.9));
+    /* Under construction ribbon */
+    .ribbon{
+      position:fixed; right:18px; top:18px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#041029; padding:8px 12px; border-radius:999px;
+      font-weight:700; font-family:"JetBrains Mono", monospace;
+      box-shadow:0 6px 24px rgba(3,7,18,0.6); z-index:60;
     }
-    .hero-inner{
-      display:grid;
-      grid-template-columns: 1fr 520px;
-      gap:48px;
-      align-items:center;
-    }
-    .hero h1{
-      font-family:"Playfair Display", serif;
-      font-size:3.25rem;
-      margin:0 0 0.6rem;
-      color:var(--accent);
-      line-height:1.05;
-    }
-    .hero p.lead{
-      color:var(--muted);
-      margin-bottom:1.25rem;
-      font-size:1.05rem;
-    }
-    .hero .cta{
-      display:flex;
-      gap:0.75rem;
-      align-items:center;
-    }
-    .btn-ghost{
-      border:1px solid var(--accent);
-      color:var(--accent);
-      background:transparent;
-      padding:10px 22px;
-      border-radius:999px;
-      font-weight:600;
-    }
-    .btn-primary{
-      background:var(--accent);
-      color:white;
-      border-radius:999px;
-      padding:10px 22px;
-      border:none;
-      font-weight:600;
-    }
+    .ribbon .dot{ display:inline-block; width:8px; height:8px; background:#082033; border-radius:50%; margin-left:8px; box-shadow:0 0 8px rgba(125,211,252,0.6); vertical-align:middle; animation:blink 1.2s infinite; }
+    @keyframes blink{0%,60%{opacity:1}80%,100%{opacity:.2}}
 
-    /* Mockup / image */
-    .mockup{
-      background:linear-gradient(180deg, #f8f7f5, #fff);
-      border-radius:12px;
-      padding:18px;
+    .hero{ padding:5.5rem 0 2rem; }
+    .hero-inner{ display:grid; grid-template-columns:1fr 420px; gap:28px; align-items:start; align-content:start; }
+    .hero h1{ font-family:"Playfair Display", serif; font-size:2.4rem; margin:0 0 .4rem; color:#e6f6ff; line-height:1.03; }
+    .hero p.lead{ color:var(--muted); margin-bottom:1rem; font-size:1rem; max-width:680px; }
+
+    .card-dev{
+      background:linear-gradient(180deg,var(--card), rgba(255,255,255,0.02));
       border:1px solid var(--line);
-      box-shadow: 0 6px 20px rgba(31,41,55,0.06);
-    }
-    .mockup img{width:100%; height:360px; object-fit:cover; border-radius:8px; display:block}
-
-    /* Portfolio grid */
-    .portfolio{
-      padding:3.5rem 0;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:20px;
-    }
-    .card-arch{
-      background:var(--card);
-      border:1px solid var(--line);
-      padding:12px;
-      border-radius:8px;
-      overflow:hidden;
-      transition:transform .36s ease, box-shadow .36s ease;
-    }
-    .card-arch:hover{ transform:translateY(-6px); box-shadow:0 14px 36px rgba(31,41,55,0.08) }
-    .card-arch img{ width:100%; height:200px; object-fit:cover; border-radius:6px; display:block }
-    .card-arch h3{ font-family:"Playfair Display", serif; font-size:1.05rem; margin:10px 0 4px }
-    .card-arch p{ margin:0; color:var(--muted); font-size:0.95rem }
-
-    /* About / Contact */
-    .split{
-      display:grid;
-      grid-template-columns:1fr 420px;
-      gap:36px;
-      align-items:start;
-      padding:3rem 0;
-      border-top:1px solid var(--line);
-      margin-top:1.5rem;
+      padding:18px; border-radius:12px; color:#e6f6ff;
+      box-shadow: 0 10px 40px rgba(2,6,23,0.6);
     }
 
-    footer{
-      padding:2rem 0;
-      color:var(--muted);
-      border-top:1px solid var(--line);
-      font-size:0.95rem;
-      margin-top:2rem;
+    .profile{
+      display:flex; gap:12px; align-items:center;
     }
+    .avatar{ width:96px; height:96px; border-radius:12px; object-fit:cover; border:1px solid rgba(255,255,255,0.06); }
+    .meta h3{ margin:0; font-family:"Playfair Display", serif; color:#e6f6ff }
+    .meta p{ margin:.25rem 0 0; color:var(--muted); font-size:.95rem }
+
+    .cta-row a{ text-decoration:none; display:inline-block; }
+    .btn-ghost{ border:1px solid rgba(255,255,255,0.06); color:var(--muted); background:transparent; padding:8px 14px; border-radius:999px; font-weight:600 }
+    .btn-primary{ background:var(--accent); color:#041029; border-radius:999px; padding:8px 14px; border:none; font-weight:700; box-shadow:0 8px 30px rgba(125,211,252,0.08) }
+
+    .terminal{
+      background:#071226; border:1px solid rgba(255,255,255,0.03);
+      padding:14px; border-radius:8px; font-family:"JetBrains Mono", monospace; color:var(--muted);
+      font-size:0.95rem; line-height:1.5;
+    }
+    .terminal .cmd{ color:var(--accent); }
+
+    .stack{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .tech{ background:rgba(255,255,255,0.03); color:var(--muted); padding:6px 10px; border-radius:8px; font-size:.85rem; border:1px solid rgba(255,255,255,0.02) }
+
+    .projects .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:12px; }
+    .project-card{ background:linear-gradient(180deg,#071427 0%, #071226 100%); border-radius:10px; padding:12px; border:1px solid rgba(255,255,255,0.03); color:var(--muted) }
+    .project-card img{ width:100%; height:120px; object-fit:cover; border-radius:6px; display:block; margin-bottom:8px }
+
+    .split{ display:grid; grid-template-columns:1fr 360px; gap:24px; align-items:start; margin-top:28px; }
+
+    footer{ padding:2rem 0; color:var(--muted); border-top:1px solid rgba(255,255,255,0.03); margin-top:2rem; font-size:0.9rem; }
 
     @media (max-width: 992px){
       .hero-inner, .split{ grid-template-columns:1fr }
-      .grid{ grid-template-columns:repeat(2,1fr) }
-      .mockup img{ height:260px }
+      .projects .grid{ grid-template-columns:repeat(2,1fr) }
     }
     @media (max-width: 576px){
-      .grid{ grid-template-columns:1fr }
-      .hero h1{ font-size:2rem }
-      .mockup img{ height:200px }
+      .projects .grid{ grid-template-columns:1fr }
+      .hero-inner{ grid-template-columns:1fr }
     }
   </style>
 </head>
 <body>
 
+  <div class="ribbon">กำลังปรับปรุง <span class="dot"></span></div>
+
   <nav class="navbar">
     <div class="container d-flex align-items-center justify-content-between">
-      <a href="#" class="brand text-decoration-none">Studio</a>
+      <a href="#" class="brand text-decoration-none">[ชื่อของคุณ] Dev</a>
       <div>
-        <a class="me-3 text-decoration-none text-muted" href="#portfolio">Portfolio</a>
         <a class="me-3 text-decoration-none text-muted" href="#about">About</a>
+        <a class="me-3 text-decoration-none text-muted" href="#projects">Work</a>
         <a class="text-decoration-none text-muted" href="#contact">Contact</a>
       </div>
     </div>
   </nav>
 
-  <main>
+  <main class="container">
     <section class="hero">
-      <div class="container">
-        <div class="hero-inner">
-          <div>
-            <h1>ออกแบบพื้นที่ที่เล่าเรื่อง</h1>
-            <p class="lead">สถาปนิกและนักออกแบบที่เชื่อมโยงสถาปัตยกรรมกับประสบการณ์ ใช้วัสดุและแสงเพื่อสร้างงานที่เรียบแต่มีความหมาย</p>
-            <div class="cta">
-              <a class="btn-primary" href="#portfolio">ผลงาน</a>
-              <a class="btn-ghost" href="#contact">ขอรับคำปรึกษา</a>
+      <div class="hero-inner">
+        <div>
+          <h1>[ชื่อของคุณ] — Web Developer</h1>
+          <p class="lead">พัฒนาเว็บยุคใหม่: Frontend, Backend และ Deployment. หน้านี้กำลังปรับปรุง — ฟีเจอร์และโปรเจกต์จะอัปเดตเร็ว ๆ นี้</p>
+
+          <div class="card-dev">
+            <div class="profile">
+              <img class="avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="avatar">
+              <div class="meta">
+                <h3>[ชื่อของคุณ] — Full‑Stack Developer</h3>
+                <p>ทำงานกับ JavaScript, React, Node.js · อยู่ใน กรุงเทพฯ · เปิดรับโปรเจกต์</p>
+                <div class="stack">
+                  <span class="tech">HTML</span>
+                  <span class="tech">CSS</span>
+                  <span class="tech">JavaScript</span>
+                  <span class="tech">React</span>
+                  <span class="tech">Node</span>
+                  <span class="tech">Docker</span>
+                </div>
+              </div>
             </div>
-            <p class="mt-4" style="color:var(--muted);font-size:.9rem">บริการ: ออกแบบอาคาร พื้นที่ภายใน บริการคำปรึกษาโครงการ</p>
-          </div>
 
-          <div class="mockup" aria-hidden="true">
-            <img src="https://images.unsplash.com/photo-1558981403-c5c6d5a5b32d?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Project mockup">
+            <div style="margin-top:12px" class="d-flex gap-2 cta-row">
+              <a class="btn-primary" href="#projects">ตัวอย่างงาน</a>
+              <a class="btn-ghost" href="#contact">ติดต่อ</a>
+              <a class="btn-ghost" href="/resume-dev.pdf" target="_blank">ดาวน์โหลด CV</a>
+            </div>
+
+            <div style="margin-top:14px" class="terminal">
+              <div><span class="cmd">$</span> git clone https://github.com/yourusername/repo</div>
+              <div><span class="cmd">$</span> cd repo && npm install</div>
+              <div style="opacity:.8; margin-top:8px; font-size:.95rem">Status: <strong style="color:var(--accent)">Under construction</strong> — updates soon</div>
+            </div>
           </div>
+        </div>
+
+        <aside>
+          <div class="card-dev" style="min-height:240px">
+            <h4 style="margin-top:0; color:#e6f6ff">Quick Links</h4>
+            <div style="margin-top:8px" class="stack">
+              <a class="tech" href="#" style="color:var(--muted); text-decoration:none">GitHub</a>
+              <a class="tech" href="#" style="color:var(--muted); text-decoration:none">LinkedIn</a>
+              <a class="tech" href="#" style="color:var(--muted); text-decoration:none">Portfolio</a>
+            </div>
+
+            <div style="margin-top:14px">
+              <h5 style="margin:0 0 6px; color:#e6f6ff">Coming soon</h5>
+              <p style="margin:0; color:var(--muted)">หน้าโปรเจกต์แบบโต้ตอบ, บล็อกเทคนิค, และระบบติดต่อที่เชื่อถือได้ กำลังพัฒนา</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="projects" class="section projects">
+      <h2 style="font-family:'Playfair Display', serif; margin-bottom:0.75rem; color:#e6f6ff">Work / Projects (ตัวอย่าง)</h2>
+      <div class="grid">
+        <div class="project-card">
+          <img src="https://images.unsplash.com/photo-1526378720501-4a3a4e7f2b7a?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="web project 1">
+          <h5 style="color:#e6f6ff; margin:0 0 6px">Responsive Landing</h5>
+          <p style="margin:0; color:var(--muted); font-size:.95rem">Landing page ที่โหลดเร็ว รองรับ SEO และ accessibility</p>
+        </div>
+
+        <div class="project-card">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="web project 2">
+          <h5 style="color:#e6f6ff; margin:0 0 6px">Dashboard App</h5>
+          <p style="margin:0; color:var(--muted); font-size:.95rem">React + Node API สำหรับจัดการข้อมูลและรายงาน</p>
+        </div>
+
+        <div class="project-card">
+          <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="web project 3">
+          <h5 style="color:#e6f6ff; margin:0 0 6px">Static Blog</h5>
+          <p style="margin:0; color:var(--muted); font-size:.95rem">Blog เกี่ยวกับเทคนิคการพัฒนาและ deployment</p>
         </div>
       </div>
     </section>
 
-    <section id="portfolio" class="portfolio">
-      <div class="container">
-        <h2 style="font-family:'Playfair Display', serif; margin-bottom:1rem">Selected Projects</h2>
-        <div class="grid">
-          <article class="card-arch">
-            <img src="https://images.unsplash.com/photo-1505842465776-3d8e1f6f0f3b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Project 1">
-            <h3>บ้านโมเดิร์นริมสระ</h3>
-            <p>ออกแบบพื้นที่เชื่อมต่อภายใน-นอก เน้นวัสดุธรรมชาติ</p>
-          </article>
-
-          <article class="card-arch">
-            <img src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Project 2">
-            <h3>สตูดิโอออกแบบ</h3>
-            <p>อาคารเชิงพาณิชย์ขนาดกะทัดรัด ใช้แสงเป็นองค์ประกอบหลัก</p>
-          </article>
-
-          <article class="card-arch">
-            <img src="https://images.unsplash.com/photo-1505691723518-36a1b7b3e0a6?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Project 3">
-            <h3>รีโนเวทคาเฟ่</h3>
-            <p>ปรับฟังก์ชันและบรรยากาศ ให้เชื่อมต่อกับชุมชน</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="container split">
+    <section id="about" class="split">
       <div>
-        <h2 style="font-family:'Playfair Display', serif">About Studio</h2>
-        <p style="color:var(--muted)">สตูดิโอทำงานร่วมกับลูกค้า ตั้งแต่การสำรวจแนวคิดจนถึงการส่งมอบไซต์งาน ให้ความสำคัญกับรายละเอียด วัสดุ และการใช้แสงเพื่อสร้างพื้นที่ที่มีเอกลักษณ์</p>
+        <h2 style="font-family:'Playfair Display', serif; color:#e6f6ff">About</h2>
+        <p style="color:var(--muted)">[ชื่อของคุณ] — นักพัฒนาเว็บที่ให้ความสำคัญกับประสบการณ์ผู้ใช้ ประสิทธิภาพ และโครงสร้างโค้ดที่เข้าใจได้ง่าย ทำงานกับโปรเจกต์ตั้งแต่ต้นจนจบ</p>
 
         <ul style="color:var(--muted); margin-top:1rem">
-          <li>ออกแบบสถาปัตยกรรมและภายใน</li>
-          <li>การบริหารโครงการแบบครบวงจร</li>
-          <li>บริการให้คำปรึกษาทางวัสดุและแสง</li>
+          <li>Frontend: HTML, CSS, JS, React</li>
+          <li>Backend: Node.js, Express, REST / GraphQL</li>
+          <li>Deployment: Docker, CI/CD, Vercel / Netlify</li>
         </ul>
       </div>
 
-      <aside id="contact" style="background:var(--card); border:1px solid var(--line); padding:18px; border-radius:8px;">
-        <h3 style="font-family:'Playfair Display', serif; margin-bottom:0.5rem">Contact</h3>
-        <p style="color:var(--muted); margin-bottom:1rem">ส่งข้อความเพื่อขอนัดหมายหรือขอข้อเสนอ</p>
-        <form>
-          <div class="mb-2">
-            <label class="form-label visually-hidden">Name</label>
-            <input class="form-control" type="text" placeholder="ชื่อ-นามสกุล" required>
-          </div>
-          <div class="mb-2">
-            <label class="form-label visually-hidden">Email</label>
-            <input class="form-control" type="email" placeholder="อีเมล" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label visually-hidden">Message</label>
-            <textarea class="form-control" rows="4" placeholder="ข้อความ / รายละเอียดโครงการ" required></textarea>
-          </div>
-          <div class="d-flex gap-2">
-            <button class="btn-primary" type="submit">ส่งข้อความ</button>
-            <a class="btn-ghost" href="mailto:info@studio.example">อีเมล</a>
-          </div>
-        </form>
+      <aside id="contact" style="background:transparent; border-radius:8px;">
+        <div class="card-dev">
+          <h3 style="font-family:'Playfair Display', serif; margin-bottom:0.5rem; color:#e6f6ff">Contact</h3>
+          <p style="color:var(--muted); margin-bottom:1rem">หน้านี้กำลังปรับปรุง — หากต้องการติดต่อส่งอีเมลหรือเปิด issue ใน GitHub</p>
+          <form id="contactForm">
+            <div class="mb-2">
+              <label class="form-label visually-hidden">Name</label>
+              <input id="name" class="form-control" type="text" placeholder="ชื่อ-นามสกุล" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label visually-hidden">Email</label>
+              <input id="email" class="form-control" type="email" placeholder="อีเมล" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label visually-hidden">Message</label>
+              <textarea id="message" class="form-control" rows="4" placeholder="ข้อความ / รายละเอียด" required></textarea>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="btn-primary" type="submit">ส่งข้อความ</button>
+              <a class="btn-ghost" id="mailtoBtn" href="mailto:">ส่งอีเมล</a>
+            </div>
+          </form>
+        </div>
       </aside>
     </section>
 
   </main>
 
-  <footer>
-    <div class="container d-flex justify-content-between align-items-center">
+  <footer class="container">
+    <div class="d-flex justify-content-between align-items-center">
       <div>
-        <strong>Studio</strong> — สตูดิโอสถาปนิก
+        <strong style="color:#e6f6ff">[ชื่อของคุณ]</strong> — Web Developer
       </div>
-      <div style="color:var(--muted)">© 2025 Studio. All rights reserved.</div>
+      <div style="color:var(--muted)">© 2025 [ชื่อของคุณ]. Site under construction.</div>
     </div>
   </footer>
 
@@ -262,6 +248,29 @@
         if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
       });
     });
+
+    // Simple client-side mailto for contact (no backend)
+    const contactForm = document.getElementById('contactForm');
+    if(contactForm){
+      contactForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        const name = encodeURIComponent(document.getElementById('name').value.trim());
+        const email = encodeURIComponent(document.getElementById('email').value.trim());
+        const msg = encodeURIComponent(document.getElementById('message').value.trim());
+        const subject = encodeURIComponent('Contact from site — ' + (name || 'Visitor'));
+        const body = encodeURIComponent('ชื่อ: ') + name + '%0D%0A' + encodeURIComponent('อีเมล: ') + email + '%0D%0A%0D%0A' + msg;
+        window.location.href = `mailto:info@yourdomain.example?subject=${subject}&body=${body}`;
+      });
+    }
+
+    // mailto quick link
+    const mailtoBtn = document.getElementById('mailtoBtn');
+    if(mailtoBtn){
+      mailtoBtn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        window.location.href = 'mailto:info@yourdomain.example?subject=Contact%20from%20site';
+      });
+    }
   </script>
 </body>
 </html>
