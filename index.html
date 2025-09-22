@@ -1,84 +1,267 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Minimal Landing Page</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Studio — สตูดิโอสถาปนิก</title>
+
+  <!-- Fonts & Bootstrap -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f8f9fa;
-      color: #343a40;
+    :root{
+      --bg:#fbfaf8;
+      --card:#ffffff;
+      --muted:#6b6b6b;
+      --accent:#1f2937;
+      --line: #e6e2de;
     }
-    .hero {
-      padding: 100px 0;
-      text-align: center;
-      background: white;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--accent);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
     }
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 700;
+
+    /* Top bar */
+    nav.navbar{
+      background:transparent;
+      padding:1rem 0;
     }
-    .hero p {
-      font-size: 1.25rem;
-      margin-bottom: 30px;
-      color: #6c757d;
+    .brand{
+      font-family:"Playfair Display", serif;
+      font-size:1.25rem;
+      letter-spacing:0.06em;
     }
-    .btn-primary {
-      padding: 10px 30px;
-      font-size: 1rem;
-      border-radius: 30px;
+
+    /* Hero */
+    .hero{
+      padding:6.5rem 0 4rem;
+      background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.9));
     }
-    footer {
-      background-color: #ffffff;
-      padding: 20px 0;
-      text-align: center;
-      color: #6c757d;
-      border-top: 1px solid #dee2e6;
+    .hero-inner{
+      display:grid;
+      grid-template-columns: 1fr 520px;
+      gap:48px;
+      align-items:center;
     }
-    nav {
-      background-color: #ffffff;
-      border-bottom: 1px solid #dee2e6;
+    .hero h1{
+      font-family:"Playfair Display", serif;
+      font-size:3.25rem;
+      margin:0 0 0.6rem;
+      color:var(--accent);
+      line-height:1.05;
+    }
+    .hero p.lead{
+      color:var(--muted);
+      margin-bottom:1.25rem;
+      font-size:1.05rem;
+    }
+    .hero .cta{
+      display:flex;
+      gap:0.75rem;
+      align-items:center;
+    }
+    .btn-ghost{
+      border:1px solid var(--accent);
+      color:var(--accent);
+      background:transparent;
+      padding:10px 22px;
+      border-radius:999px;
+      font-weight:600;
+    }
+    .btn-primary{
+      background:var(--accent);
+      color:white;
+      border-radius:999px;
+      padding:10px 22px;
+      border:none;
+      font-weight:600;
+    }
+
+    /* Mockup / image */
+    .mockup{
+      background:linear-gradient(180deg, #f8f7f5, #fff);
+      border-radius:12px;
+      padding:18px;
+      border:1px solid var(--line);
+      box-shadow: 0 6px 20px rgba(31,41,55,0.06);
+    }
+    .mockup img{width:100%; height:360px; object-fit:cover; border-radius:8px; display:block}
+
+    /* Portfolio grid */
+    .portfolio{
+      padding:3.5rem 0;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:20px;
+    }
+    .card-arch{
+      background:var(--card);
+      border:1px solid var(--line);
+      padding:12px;
+      border-radius:8px;
+      overflow:hidden;
+      transition:transform .36s ease, box-shadow .36s ease;
+    }
+    .card-arch:hover{ transform:translateY(-6px); box-shadow:0 14px 36px rgba(31,41,55,0.08) }
+    .card-arch img{ width:100%; height:200px; object-fit:cover; border-radius:6px; display:block }
+    .card-arch h3{ font-family:"Playfair Display", serif; font-size:1.05rem; margin:10px 0 4px }
+    .card-arch p{ margin:0; color:var(--muted); font-size:0.95rem }
+
+    /* About / Contact */
+    .split{
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:36px;
+      align-items:start;
+      padding:3rem 0;
+      border-top:1px solid var(--line);
+      margin-top:1.5rem;
+    }
+
+    footer{
+      padding:2rem 0;
+      color:var(--muted);
+      border-top:1px solid var(--line);
+      font-size:0.95rem;
+      margin-top:2rem;
+    }
+
+    @media (max-width: 992px){
+      .hero-inner, .split{ grid-template-columns:1fr }
+      .grid{ grid-template-columns:repeat(2,1fr) }
+      .mockup img{ height:260px }
+    }
+    @media (max-width: 576px){
+      .grid{ grid-template-columns:1fr }
+      .hero h1{ font-size:2rem }
+      .mockup img{ height:200px }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">MyBrand</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-        </ul>
+  <nav class="navbar">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="#" class="brand text-decoration-none">Studio</a>
+      <div>
+        <a class="me-3 text-decoration-none text-muted" href="#portfolio">Portfolio</a>
+        <a class="me-3 text-decoration-none text-muted" href="#about">About</a>
+        <a class="text-decoration-none text-muted" href="#contact">Contact</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <h1>Build Something Great</h1>
-      <p>Minimal, responsive, and ready to launch. Perfect for startups and portfolios.</p>
-      <a href="#" class="btn btn-primary">Get Started</a>
-    </div>
-  </section>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <div>
+            <h1>ออกแบบพื้นที่ที่เล่าเรื่อง</h1>
+            <p class="lead">สถาปนิกและนักออกแบบที่เชื่อมโยงสถาปัตยกรรมกับประสบการณ์ ใช้วัสดุและแสงเพื่อสร้างงานที่เรียบแต่มีความหมาย</p>
+            <div class="cta">
+              <a class="btn-primary" href="#portfolio">ผลงาน</a>
+              <a class="btn-ghost" href="#contact">ขอรับคำปรึกษา</a>
+            </div>
+            <p class="mt-4" style="color:var(--muted);font-size:.9rem">บริการ: ออกแบบอาคาร พื้นที่ภายใน บริการคำปรึกษาโครงการ</p>
+          </div>
 
-  <!-- Footer -->
+          <div class="mockup" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1558981403-c5c6d5a5b32d?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Project mockup">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+        <h2 style="font-family:'Playfair Display', serif; margin-bottom:1rem">Selected Projects</h2>
+        <div class="grid">
+          <article class="card-arch">
+            <img src="https://images.unsplash.com/photo-1505842465776-3d8e1f6f0f3b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Project 1">
+            <h3>บ้านโมเดิร์นริมสระ</h3>
+            <p>ออกแบบพื้นที่เชื่อมต่อภายใน-นอก เน้นวัสดุธรรมชาติ</p>
+          </article>
+
+          <article class="card-arch">
+            <img src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Project 2">
+            <h3>สตูดิโอออกแบบ</h3>
+            <p>อาคารเชิงพาณิชย์ขนาดกะทัดรัด ใช้แสงเป็นองค์ประกอบหลัก</p>
+          </article>
+
+          <article class="card-arch">
+            <img src="https://images.unsplash.com/photo-1505691723518-36a1b7b3e0a6?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Project 3">
+            <h3>รีโนเวทคาเฟ่</h3>
+            <p>ปรับฟังก์ชันและบรรยากาศ ให้เชื่อมต่อกับชุมชน</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="container split">
+      <div>
+        <h2 style="font-family:'Playfair Display', serif">About Studio</h2>
+        <p style="color:var(--muted)">สตูดิโอทำงานร่วมกับลูกค้า ตั้งแต่การสำรวจแนวคิดจนถึงการส่งมอบไซต์งาน ให้ความสำคัญกับรายละเอียด วัสดุ และการใช้แสงเพื่อสร้างพื้นที่ที่มีเอกลักษณ์</p>
+
+        <ul style="color:var(--muted); margin-top:1rem">
+          <li>ออกแบบสถาปัตยกรรมและภายใน</li>
+          <li>การบริหารโครงการแบบครบวงจร</li>
+          <li>บริการให้คำปรึกษาทางวัสดุและแสง</li>
+        </ul>
+      </div>
+
+      <aside id="contact" style="background:var(--card); border:1px solid var(--line); padding:18px; border-radius:8px;">
+        <h3 style="font-family:'Playfair Display', serif; margin-bottom:0.5rem">Contact</h3>
+        <p style="color:var(--muted); margin-bottom:1rem">ส่งข้อความเพื่อขอนัดหมายหรือขอข้อเสนอ</p>
+        <form>
+          <div class="mb-2">
+            <label class="form-label visually-hidden">Name</label>
+            <input class="form-control" type="text" placeholder="ชื่อ-นามสกุล" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label visually-hidden">Email</label>
+            <input class="form-control" type="email" placeholder="อีเมล" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label visually-hidden">Message</label>
+            <textarea class="form-control" rows="4" placeholder="ข้อความ / รายละเอียดโครงการ" required></textarea>
+          </div>
+          <div class="d-flex gap-2">
+            <button class="btn-primary" type="submit">ส่งข้อความ</button>
+            <a class="btn-ghost" href="mailto:info@studio.example">อีเมล</a>
+          </div>
+        </form>
+      </aside>
+    </section>
+
+  </main>
+
   <footer>
-    <div class="container">
-      <p>&copy; 2025 MyBrand. All rights reserved.</p>
+    <div class="container d-flex justify-content-between align-items-center">
+      <div>
+        <strong>Studio</strong> — สตูดิโอสถาปนิก
+      </div>
+      <div style="color:var(--muted)">© 2025 Studio. All rights reserved.</div>
     </div>
   </footer>
 
-  <!-- Bootstrap JS (optional) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const target = document.querySelector(a.getAttribute('href'));
+        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  </script>
 </body>
 </html>
