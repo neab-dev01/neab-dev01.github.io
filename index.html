@@ -1,276 +1,111 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>[ชื่อของคุณ] — Dev Web (กำลังปรับปรุง)</title>
-
-  <!-- Fonts & Bootstrap -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
+  <title>We'll be back soon — Dev Web</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0f1724;
-      --card:#0b1220;
+      --bg:#0b1220;
+      --card:#071226;
       --muted:#9aa4b2;
-      --accent:#7dd3fc;
-      --accent-2:#60a5fa;
-      --line:#132032;
-      --glass: rgba(255,255,255,0.03);
+      --accent:#60a5fa;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background:linear-gradient(180deg,#071028 0%, #0b1220 100%);
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:
+        radial-gradient(800px 400px at 10% 10%, rgba(96,165,250,0.04), transparent 8%),
+        radial-gradient(700px 350px at 90% 90%, rgba(96,165,250,0.03), transparent 10%),
+        linear-gradient(180deg,#040615 0%, #0b1220 100%);
       color:var(--muted);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.6;
-      padding-bottom:40px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
     }
 
-    nav.navbar{ background:transparent; padding:1rem 0; }
-    .brand{ font-family:"Playfair Display", serif; font-size:1.15rem; color:var(--accent); }
+    .wrap{
+      text-align:center;
+      width:min(860px,92vw);
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border:1px solid rgba(255,255,255,0.03);
+      padding:48px 36px;
+      border-radius:12px;
+      box-shadow:0 30px 80px rgba(2,6,23,0.6);
+    }
 
-    /* Under construction ribbon */
+    .logo{
+      width:96px; height:96px;
+      margin:0 auto 18px;
+      display:flex; align-items:center; justify-content:center;
+      border-radius:16px;
+      background:linear-gradient(135deg,var(--accent), #7dd3fc);
+      color:#041029;
+      box-shadow:0 10px 30px rgba(96,165,250,0.08);
+      font-family:"JetBrains Mono", monospace;
+      font-weight:700;
+      font-size:34px;
+    }
+
+    h1{
+      margin:0 0 12px 0;
+      font-family:"JetBrains Mono", monospace;
+      color:#e6f6ff;
+      font-size:1.5rem;
+    }
+    p.lead{
+      margin:0 auto 6px;
+      color:var(--muted);
+      max-width:58ch;
+      font-size:1rem;
+      line-height:1.5;
+    }
+
+    small.note{
+      display:block;
+      margin-top:16px;
+      color:rgba(154,164,178,0.85);
+      font-size:.92rem;
+    }
+
     .ribbon{
-      position:fixed; right:18px; top:18px;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      color:#041029; padding:8px 12px; border-radius:999px;
-      font-weight:700; font-family:"JetBrains Mono", monospace;
-      box-shadow:0 6px 24px rgba(3,7,18,0.6); z-index:60;
-    }
-    .ribbon .dot{ display:inline-block; width:8px; height:8px; background:#082033; border-radius:50%; margin-left:8px; box-shadow:0 0 8px rgba(125,211,252,0.6); vertical-align:middle; animation:blink 1.2s infinite; }
-    @keyframes blink{0%,60%{opacity:1}80%,100%{opacity:.2}}
-
-    .hero{ padding:5.5rem 0 2rem; }
-    .hero-inner{ display:grid; grid-template-columns:1fr 420px; gap:28px; align-items:start; align-content:start; }
-    .hero h1{ font-family:"Playfair Display", serif; font-size:2.4rem; margin:0 0 .4rem; color:#e6f6ff; line-height:1.03; }
-    .hero p.lead{ color:var(--muted); margin-bottom:1rem; font-size:1rem; max-width:680px; }
-
-    .card-dev{
-      background:linear-gradient(180deg,var(--card), rgba(255,255,255,0.02));
-      border:1px solid var(--line);
-      padding:18px; border-radius:12px; color:#e6f6ff;
-      box-shadow: 0 10px 40px rgba(2,6,23,0.6);
+      position:fixed;
+      right:18px;
+      top:18px;
+      background:linear-gradient(90deg,var(--accent), #7dd3fc);
+      color:#041029;
+      padding:8px 12px;
+      border-radius:999px;
+      font-family:"JetBrains Mono", monospace;
+      font-weight:700;
+      box-shadow:0 8px 28px rgba(3,7,18,0.6);
     }
 
-    .profile{
-      display:flex; gap:12px; align-items:center;
-    }
-    .avatar{ width:96px; height:96px; border-radius:12px; object-fit:cover; border:1px solid rgba(255,255,255,0.06); }
-    .meta h3{ margin:0; font-family:"Playfair Display", serif; color:#e6f6ff }
-    .meta p{ margin:.25rem 0 0; color:var(--muted); font-size:.95rem }
-
-    .cta-row a{ text-decoration:none; display:inline-block; }
-    .btn-ghost{ border:1px solid rgba(255,255,255,0.06); color:var(--muted); background:transparent; padding:8px 14px; border-radius:999px; font-weight:600 }
-    .btn-primary{ background:var(--accent); color:#041029; border-radius:999px; padding:8px 14px; border:none; font-weight:700; box-shadow:0 8px 30px rgba(125,211,252,0.08) }
-
-    .terminal{
-      background:#071226; border:1px solid rgba(255,255,255,0.03);
-      padding:14px; border-radius:8px; font-family:"JetBrains Mono", monospace; color:var(--muted);
-      font-size:0.95rem; line-height:1.5;
-    }
-    .terminal .cmd{ color:var(--accent); }
-
-    .stack{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
-    .tech{ background:rgba(255,255,255,0.03); color:var(--muted); padding:6px 10px; border-radius:8px; font-size:.85rem; border:1px solid rgba(255,255,255,0.02) }
-
-    .projects .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:12px; }
-    .project-card{ background:linear-gradient(180deg,#071427 0%, #071226 100%); border-radius:10px; padding:12px; border:1px solid rgba(255,255,255,0.03); color:var(--muted) }
-    .project-card img{ width:100%; height:120px; object-fit:cover; border-radius:6px; display:block; margin-bottom:8px }
-
-    .split{ display:grid; grid-template-columns:1fr 360px; gap:24px; align-items:start; margin-top:28px; }
-
-    footer{ padding:2rem 0; color:var(--muted); border-top:1px solid rgba(255,255,255,0.03); margin-top:2rem; font-size:0.9rem; }
-
-    @media (max-width: 992px){
-      .hero-inner, .split{ grid-template-columns:1fr }
-      .projects .grid{ grid-template-columns:repeat(2,1fr) }
-    }
-    @media (max-width: 576px){
-      .projects .grid{ grid-template-columns:1fr }
-      .hero-inner{ grid-template-columns:1fr }
+    /* responsive */
+    @media (max-width:520px){
+      .wrap{ padding:28px 18px }
+      .logo{ width:76px; height:76px; font-size:26px; border-radius:12px }
+      h1{ font-size:1.2rem }
     }
   </style>
 </head>
 <body>
+  <div class="ribbon">กำลังปรับปรุง</div>
 
-  <div class="ribbon">กำลังปรับปรุง <span class="dot"></span></div>
-
-  <nav class="navbar">
-    <div class="container d-flex align-items-center justify-content-between">
-      <a href="#" class="brand text-decoration-none">[ชื่อของคุณ] Dev</a>
-      <div>
-        <a class="me-3 text-decoration-none text-muted" href="#about">About</a>
-        <a class="me-3 text-decoration-none text-muted" href="#projects">Work</a>
-        <a class="text-decoration-none text-muted" href="#contact">Contact</a>
-      </div>
+  <main class="wrap" role="main" aria-labelledby="title">
+    <div class="logo" aria-hidden="true">
+      <!-- simple dev icon: code brackets -->
+      &lt;/&gt;
     </div>
-  </nav>
 
-  <main class="container">
-    <section class="hero">
-      <div class="hero-inner">
-        <div>
-          <h1>[ชื่อของคุณ] — Web Developer</h1>
-          <p class="lead">พัฒนาเว็บยุคใหม่: Frontend, Backend และ Deployment. หน้านี้กำลังปรับปรุง — ฟีเจอร์และโปรเจกต์จะอัปเดตเร็ว ๆ นี้</p>
+    <h1 id="title">We'll be back soon!</h1>
+    <p class="lead">We're just making some improvements to our website. Thank you for your patience.</p>
 
-          <div class="card-dev">
-            <div class="profile">
-              <img class="avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="avatar">
-              <div class="meta">
-                <h3>[ชื่อของคุณ] — Full‑Stack Developer</h3>
-                <p>ทำงานกับ JavaScript, React, Node.js · อยู่ใน กรุงเทพฯ · เปิดรับโปรเจกต์</p>
-                <div class="stack">
-                  <span class="tech">HTML</span>
-                  <span class="tech">CSS</span>
-                  <span class="tech">JavaScript</span>
-                  <span class="tech">React</span>
-                  <span class="tech">Node</span>
-                  <span class="tech">Docker</span>
-                </div>
-              </div>
-            </div>
-
-            <div style="margin-top:12px" class="d-flex gap-2 cta-row">
-              <a class="btn-primary" href="#projects">ตัวอย่างงาน</a>
-              <a class="btn-ghost" href="#contact">ติดต่อ</a>
-              <a class="btn-ghost" href="/resume-dev.pdf" target="_blank">ดาวน์โหลด CV</a>
-            </div>
-
-            <div style="margin-top:14px" class="terminal">
-              <div><span class="cmd">$</span> git clone https://github.com/yourusername/repo</div>
-              <div><span class="cmd">$</span> cd repo && npm install</div>
-              <div style="opacity:.8; margin-top:8px; font-size:.95rem">Status: <strong style="color:var(--accent)">Under construction</strong> — updates soon</div>
-            </div>
-          </div>
-        </div>
-
-        <aside>
-          <div class="card-dev" style="min-height:240px">
-            <h4 style="margin-top:0; color:#e6f6ff">Quick Links</h4>
-            <div style="margin-top:8px" class="stack">
-              <a class="tech" href="#" style="color:var(--muted); text-decoration:none">GitHub</a>
-              <a class="tech" href="#" style="color:var(--muted); text-decoration:none">LinkedIn</a>
-              <a class="tech" href="#" style="color:var(--muted); text-decoration:none">Portfolio</a>
-            </div>
-
-            <div style="margin-top:14px">
-              <h5 style="margin:0 0 6px; color:#e6f6ff">Coming soon</h5>
-              <p style="margin:0; color:var(--muted)">หน้าโปรเจกต์แบบโต้ตอบ, บล็อกเทคนิค, และระบบติดต่อที่เชื่อถือได้ กำลังพัฒนา</p>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section id="projects" class="section projects">
-      <h2 style="font-family:'Playfair Display', serif; margin-bottom:0.75rem; color:#e6f6ff">Work / Projects (ตัวอย่าง)</h2>
-      <div class="grid">
-        <div class="project-card">
-          <img src="https://images.unsplash.com/photo-1526378720501-4a3a4e7f2b7a?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="web project 1">
-          <h5 style="color:#e6f6ff; margin:0 0 6px">Responsive Landing</h5>
-          <p style="margin:0; color:var(--muted); font-size:.95rem">Landing page ที่โหลดเร็ว รองรับ SEO และ accessibility</p>
-        </div>
-
-        <div class="project-card">
-          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="web project 2">
-          <h5 style="color:#e6f6ff; margin:0 0 6px">Dashboard App</h5>
-          <p style="margin:0; color:var(--muted); font-size:.95rem">React + Node API สำหรับจัดการข้อมูลและรายงาน</p>
-        </div>
-
-        <div class="project-card">
-          <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="web project 3">
-          <h5 style="color:#e6f6ff; margin:0 0 6px">Static Blog</h5>
-          <p style="margin:0; color:var(--muted); font-size:.95rem">Blog เกี่ยวกับเทคนิคการพัฒนาและ deployment</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="split">
-      <div>
-        <h2 style="font-family:'Playfair Display', serif; color:#e6f6ff">About</h2>
-        <p style="color:var(--muted)">[ชื่อของคุณ] — นักพัฒนาเว็บที่ให้ความสำคัญกับประสบการณ์ผู้ใช้ ประสิทธิภาพ และโครงสร้างโค้ดที่เข้าใจได้ง่าย ทำงานกับโปรเจกต์ตั้งแต่ต้นจนจบ</p>
-
-        <ul style="color:var(--muted); margin-top:1rem">
-          <li>Frontend: HTML, CSS, JS, React</li>
-          <li>Backend: Node.js, Express, REST / GraphQL</li>
-          <li>Deployment: Docker, CI/CD, Vercel / Netlify</li>
-        </ul>
-      </div>
-
-      <aside id="contact" style="background:transparent; border-radius:8px;">
-        <div class="card-dev">
-          <h3 style="font-family:'Playfair Display', serif; margin-bottom:0.5rem; color:#e6f6ff">Contact</h3>
-          <p style="color:var(--muted); margin-bottom:1rem">หน้านี้กำลังปรับปรุง — หากต้องการติดต่อส่งอีเมลหรือเปิด issue ใน GitHub</p>
-          <form id="contactForm">
-            <div class="mb-2">
-              <label class="form-label visually-hidden">Name</label>
-              <input id="name" class="form-control" type="text" placeholder="ชื่อ-นามสกุล" required>
-            </div>
-            <div class="mb-2">
-              <label class="form-label visually-hidden">Email</label>
-              <input id="email" class="form-control" type="email" placeholder="อีเมล" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label visually-hidden">Message</label>
-              <textarea id="message" class="form-control" rows="4" placeholder="ข้อความ / รายละเอียด" required></textarea>
-            </div>
-            <div class="d-flex gap-2">
-              <button class="btn-primary" type="submit">ส่งข้อความ</button>
-              <a class="btn-ghost" id="mailtoBtn" href="mailto:">ส่งอีเมล</a>
-            </div>
-          </form>
-        </div>
-      </aside>
-    </section>
-
+    <small class="note">Dev Web — site maintenance mode</small>
   </main>
-
-  <footer class="container">
-    <div class="d-flex justify-content-between align-items-center">
-      <div>
-        <strong style="color:#e6f6ff">[ชื่อของคุณ]</strong> — Web Developer
-      </div>
-      <div style="color:var(--muted)">© 2025 [ชื่อของคุณ]. Site under construction.</div>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Smooth scroll for internal links
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        const target = document.querySelector(a.getAttribute('href'));
-        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
-      });
-    });
-
-    // Simple client-side mailto for contact (no backend)
-    const contactForm = document.getElementById('contactForm');
-    if(contactForm){
-      contactForm.addEventListener('submit', function(e){
-        e.preventDefault();
-        const name = encodeURIComponent(document.getElementById('name').value.trim());
-        const email = encodeURIComponent(document.getElementById('email').value.trim());
-        const msg = encodeURIComponent(document.getElementById('message').value.trim());
-        const subject = encodeURIComponent('Contact from site — ' + (name || 'Visitor'));
-        const body = encodeURIComponent('ชื่อ: ') + name + '%0D%0A' + encodeURIComponent('อีเมล: ') + email + '%0D%0A%0D%0A' + msg;
-        window.location.href = `mailto:info@yourdomain.example?subject=${subject}&body=${body}`;
-      });
-    }
-
-    // mailto quick link
-    const mailtoBtn = document.getElementById('mailtoBtn');
-    if(mailtoBtn){
-      mailtoBtn.addEventListener('click', (e)=>{
-        e.preventDefault();
-        window.location.href = 'mailto:info@yourdomain.example?subject=Contact%20from%20site';
-      });
-    }
-  </script>
 </body>
 </html>
